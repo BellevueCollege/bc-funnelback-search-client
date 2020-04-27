@@ -1,0 +1,198 @@
+.funnelback {
+  /** Search form */
+  /** Search results */
+  /** Cart */
+  /** History */
+  /** Facets */
+  /** Results */
+  /** Results - Courses */
+  /** Results - People */
+  /** Results - Video */
+  /** Results - Events */
+  /** Results - Twitter Cards */
+  /** Contextual Navigation */
+  /** Curator */
+  /** Deferred images */
+  /** Additional Utility */ }
+  .funnelback .jumbotron {
+    background: #fff 0% 40%;
+    background-size: cover;
+    color: #242D3D;
+    display: flex; }
+    .funnelback .jumbotron .container {
+      display: flex;
+      align-items: center; }
+    .funnelback .jumbotron .container form {
+      width: 100%; }
+    .funnelback .jumbotron h2 {
+      display: none; }
+  @media (max-width: 768px) {
+    .funnelback .jumbotron {
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      min-height: 180px; } }
+  .funnelback .jumbotron .input-group {
+    border-bottom: solid 1px #242D3D; }
+    .funnelback .jumbotron .input-group > span {
+      flex: 1 0 auto; }
+  .funnelback .jumbotron input,
+  .funnelback .jumbotron input:focus,
+  .funnelback .jumbotron .input-group-text {
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+    color: #242D3D;
+    font-size: x-large;
+    font-weight: 300; }
+  .funnelback .jumbotron input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button; }
+  .funnelback .jumbotron input[type=search]:focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 90, 141, 0.5); }
+  .funnelback .jumbotron .btn-link {
+    border: none;
+    background-color: transparent; }
+  .funnelback .jumbotron .btn-link:hover {
+    cursor: pointer; }
+  .funnelback .jumbotron .btn-link:hover:disabled {
+    cursor: initial;
+    color: #6c757d;
+    text-decoration: none; }
+  .funnelback .jumbotron .list-inline-item a {
+    color: #242D3D; }
+  .funnelback .jumbotron small.float-left {
+    color: #242D3D;
+    font-style: italic;
+    font-size: x-small; }
+  @media (max-width: 768px) {
+    .funnelback .jumbotron .under-form-content {
+      font-size: 75%; } }
+  .funnelback .card .card-header a {
+    color: black; }
+  @media (max-width: 992px) {
+    .funnelback section.search-results .container,
+    .funnelback section.search-history .container,
+    .funnelback section.search-cart .container {
+      padding-top: 0rem; }
+    .funnelback .navbar-toggler.mb-3 {
+      background: #242D3D;
+      padding: 0.75rem 1rem 0.5em;
+      color: #fff; }
+    .funnelback .navbar-toggler.mb-3 .navbar-toggler-icon {
+      width: 1.25em;
+      height: 1.25em; } }
+  @media (max-width: 768px) {
+    .funnelback {
+      /* Hide sort / limit controls on small screens */ }
+      .funnelback .search-results .dropdown {
+        display: none; } }
+  .funnelback .search-cart .btn-link {
+    border: none; }
+  .funnelback .search-cart .btn-link:hover {
+    cursor: pointer; }
+  .funnelback .search-cart .btn-clear {
+    margin-left: 1rem; }
+  .funnelback .search-history .btn-link {
+    border: none; }
+  .funnelback .search-history .btn-link:hover {
+    cursor: pointer; }
+  .funnelback .session-history-link .session-history-show {
+    background: none;
+    cursor: pointer; }
+  .funnelback .session-history-link .session-history-show:hover {
+    text-decoration: underline; }
+  .funnelback .card.search-facet {
+    border-radius: 0px;
+    margin-top: -1px; }
+  .funnelback .card.search-facet:last-child {
+    border-radius: 0px 0px 0.25rem 0.25rem;
+    margin-top: -1px; }
+  .funnelback .search-facets .card.search-refine {
+    border-bottom: none; }
+  .funnelback .search-facets h3 {
+    font-size: initial; }
+  .funnelback .search-results .search-facet h4 {
+    font-size: medium;
+    font-weight: 600;
+    border-bottom: 1px solid #eeefea;
+    padding-bottom: 0.5rem; }
+  .funnelback .search-facets .search-facet li {
+    clear: right; }
+  .funnelback .search-facets .badge-default {
+    color: #636c72;
+    /* == text-muted */
+    background-color: #eeefea; }
+  .funnelback .bg-dark {
+    background: #242D3D !important; }
+  .funnelback .search-results .search-tier h3 {
+    font-size: x-large; }
+  .funnelback .search-results .card-header,
+  .funnelback .search-results .card-footer {
+    /* background-color: #DDDDDD; */ }
+  .funnelback .search-results .card-text img {
+    max-height: 100px;
+    max-width: 200px; }
+  .funnelback .search-results .card-footer strong:not(:first-child) {
+    margin-left: 1rem; }
+  .funnelback .search-results .search-spelling {
+    font-size: x-large; }
+  .funnelback .search-result-course .row h5 {
+    color: #242D3D; }
+  .funnelback .search-result-course a.border-secondary {
+    border-color: #ccc !important; }
+  .funnelback .search-result-people h4 a {
+    color: #242D3D; }
+  @media (max-width: 768px) {
+    .funnelback .search-result-people img {
+      margin-top: 1rem;
+      width: 25%; } }
+  .funnelback .search-result-people .fa-user {
+    font-size: 600%;
+    color: #d7d8d2; }
+  .funnelback .search-result-video h4 a {
+    color: #242D3D; }
+  .funnelback .search-result-video .col-md-3 a {
+    position: relative;
+    display: block; }
+  .funnelback .search-result-video .card-img-overlay .badge {
+    position: absolute;
+    right: .5rem;
+    bottom: .5rem; }
+  .funnelback .search-result-video .card-img-overlay .fa-play-circle {
+    top: 30%;
+    left: 38%;
+    position: absolute;
+    color: rgba(255, 255, 255, 0.75); }
+  .funnelback .search-result-video a:hover .card-img-overlay .fa-play-circle {
+    color: white; }
+  .funnelback .search-result-event .search-event-date {
+    width: 100%;
+    border: solid 2px #242D3D;
+    max-width: 5rem; }
+  .funnelback .search-result-event .search-event-date-month {
+    background-color: #242D3D;
+    color: white;
+    font-size: x-large;
+    font-weight: 600; }
+  .funnelback .search-result-event .search-event-date-day {
+    font-size: xx-large;
+    font-weight: 600;
+    height: 4rem; }
+  .funnelback .search-result-twitter-tweet {
+    min-height: 4.5rem;
+    max-height: 4.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .funnelback .search-contextual-navigation h3 {
+    color: #242D3D; }
+  .funnelback blockquote.search-exhibit {
+    border-left: solid .25rem #eeefea; }
+  .funnelback img.deferred {
+    display: none; }
+  .funnelback .rounded-pill {
+    border-radius: 2rem; }
+  .funnelback .rounded-pill-right {
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem; }
+  .funnelback .rounded-pill-left {
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem; }
