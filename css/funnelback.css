@@ -14,6 +14,9 @@
   /** Curator */
   /** Deferred images */
   /** Additional Utility */ }
+  .funnelback strong {
+    font-weight: 900;
+    background: #ffc; }
   .funnelback .jumbotron {
     background: #fff 0% 40%;
     background-size: cover;
