@@ -199,3 +199,80 @@
   .funnelback .rounded-pill-left {
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem; }
+
+/* Autocomplete */
+.twitter-typeahead {
+  flex-grow: 2;
+  width: 50%; }
+
+.tt-menu {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+  color: #222;
+  left: -45% !important;
+  width: 203% !important;
+  padding: .5rem;
+  border: solid 1px rgba(0, 0, 0, 0.25);
+  border-radius: .25rem; }
+
+.tt-dataset {
+  float: left;
+  height: 100%; }
+  .tt-dataset .details p {
+    margin: 0; }
+
+.tt-dataset:first-child,
+.tt-dataset:first-child .tt-suggestion {
+  border-left: none; }
+
+.tt-dataset h5 {
+  font-size: large;
+  text-align: center; }
+
+.tt-suggestion {
+  cursor: pointer;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  border-left: solid 1px rgba(0, 0, 0, 0.125); }
+
+.tt-suggestion.tt-cursor,
+.tt-suggestion:hover {
+  background-color: #ddd; }
+
+.tt-dataset-organic {
+  width: 25%; }
+
+.tt-dataset-programs {
+  width: 40%; }
+
+.tt-dataset-courses {
+  width: 35%; }
+
+.tt-dataset-programs .tt-suggestion,
+.tt-dataset-courses .tt-suggestion {
+  margin-top: .0rem;
+  margin-bottom: .0rem; }
+
+.tt-dataset .details {
+  line-height: 1rem; }
+
+.tt-dataset h6 {
+  margin: 0; }
+
+.tt-selectable {
+  padding: .25rem; }
+
+@media (max-width: 768px) {
+  /* Do not display auto-complete on small devices */
+  .tt-menu {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important; }
+  .tt-dataset {
+    width: 100%;
+    float: none;
+    display: none; }
+  .tt-dataset-organic {
+    display: block; }
+  .input-group-prepend .fas.fa-search {
+    display: none; } }
