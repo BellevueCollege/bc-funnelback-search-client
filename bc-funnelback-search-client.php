@@ -15,32 +15,39 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 require_once('classes/class-funnelback-request.php');
 require_once('classes/class-funnelback-display.php');
 
+$fb_config_default = array(
+	'query_peram'      => 'txtQuery',
+	'site_peram'       => 'site',
+	'engine_url'       => 'https://stage-15-20-search.clients.funnelback.com/s/search.html',
+	'collection'       => 'bellevuecollege-search',
+	'cookie_name'      => 'user-id'
+);
+
 // Shortcode
 function bcfunnelback_shortcode( $sc_config ) {
+	global $fb_config_default;
 	$sc_config = shortcode_atts( array(
-		'query_peram'      => 'txtQuery',
-		'site_peram'       => 'site',
-		'engine_url'       => 'https://stage-15-20-search.clients.funnelback.com/s/search.html',
-		'collection'       => 'bellevuecollege-search',
+		'query_peram'      => $fb_config_default['query_peram'],
+		'site_peram'       => $fb_config_default['site_peram'],
+		'engine_url'       => $fb_config_default['engine_url'],
+		'collection'       => $fb_config_default['collection'],
 		'localstorage_key' => 'searchHistory',
 		'debug'            => false
 	), $sc_config, 'bcfunnelback_shortcode' );
-
-	$cookie_name = 'user-id';
 
 	$request = new Funnelback_Request(
 		$sc_config['engine_url'],
 		$sc_config['collection'],
 		$_GET,
 		$sc_config['query_peram'],
-		$cookie_name,
+		$fb_config_default['cookie_name'],
 	);
 	$raw_results = $request->get_results();
 
 	$results_display = new Funnelback_Display(
 		$raw_results,
 		$sc_config['debug'],
-		$cookie_name,
+		$fb_config_default['cookie_name'],
 	);
 
 	return $results_display->display();
@@ -62,3 +69,86 @@ function bcfunnelback_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'bcfunnelback_scripts' );
+
+
+/**
+ * Add REST Routes for cart
+ */
+
+add_action( 'rest_api_init', function () {
+  register_rest_route( 'funnelback/v1', '/cart', array(
+    'methods' => 'GET',
+    'callback' => 'fb_relay_get',
+  ) );
+  register_rest_route( 'funnelback/v1', '/cart', array(
+    'methods' => 'POST',
+    'callback' => 'fb_relay_post',
+  ) );
+  register_rest_route( 'funnelback/v1', '/cart', array(
+    'methods' => 'PUT',
+    'callback' => 'fb_relay_put',
+  ) );
+  register_rest_route( 'funnelback/v1', '/cart', array(
+    'methods' => 'DELETE',
+    'callback' => 'fb_relay_delete',
+  ) );
+} );
+
+function fb_relay_get( $data ) {
+	global $fb_config_default;
+	$request = fb_relay( $data );
+	$raw_results = $request->get_results();
+	$results = new Funnelback_Display(
+		$raw_results,
+		false,
+		$fb_config_default['cookie_name'],
+	);
+	return $results->display_cart();
+}
+
+function fb_relay_post( $data ) {
+	global $fb_config_default;
+	$request = fb_relay( $data );
+	$raw_results = $request->post_request();
+	$results = new Funnelback_Display(
+		$raw_results,
+		false,
+		$fb_config_default['cookie_name'],
+	);
+	return $results->display_cart();
+}
+
+function fb_relay_put( $data ) {
+	global $fb_config_default;
+	$request = fb_relay( $data );
+	$raw_results = $request->put_request();
+	$results = new Funnelback_Display(
+		$raw_results,
+		false,
+		$fb_config_default['cookie_name'],
+	);
+	return $results->display_cart();
+}
+function fb_relay_delete( $data ) {
+	global $fb_config_default;
+	$request = fb_relay( $data );
+	$raw_results = $request->delete_request();
+	$results = new Funnelback_Display(
+		$raw_results,
+		false,
+		$fb_config_default['cookie_name'],
+	);
+	return $results->display_cart();
+}
+
+function fb_relay ( $data ) {
+	global $fb_config_default;
+	$request =  new Funnelback_Request(
+		'https://stage-15-20-search.clients.funnelback.com/s/cart.json',
+		$fb_config_default['collection'],
+		$data->get_params(),
+		$fb_config_default['query_peram'],
+		$fb_config_default['cookie_name'],
+	);
+	return $request;
+}

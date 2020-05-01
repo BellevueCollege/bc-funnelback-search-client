@@ -19,29 +19,82 @@ class Funnelback_Request {
 
 	public function get_results() {
 		return wp_remote_get(
-			$this->build_request_url(),
+			self::build_request_url(
+				$this->engine_url,
+				$this->collection,
+				$this->custom_query_param,
+				$this->raw_query
+			),
 			array(
 				'timeout' => 10,
-				'headers' => $this->build_request_headers(),
-				'cookies' => $this->build_request_cookies(),
+				'headers' => self::build_request_headers(),
+				'cookies' => self::build_request_cookies( $this->cookie_name ),
+			)
+		);
+	}
+
+	public function post_request() {
+		return wp_remote_post(
+			self::build_request_url(
+				$this->engine_url,
+				$this->collection,
+				$this->custom_query_param,
+				$this->raw_query
+			),
+			array(
+				'timeout' => 10,
+				'headers' => self::build_request_headers(),
+				'cookies' => self::build_request_cookies( $this->cookie_name ),
+			)
+		);
+	}
+	public function put_request() {
+		return wp_remote_request(
+			self::build_request_url(
+				$this->engine_url,
+				$this->collection,
+				$this->custom_query_param,
+				$this->raw_query
+			),
+			array(
+				'timeout' => 10,
+				'headers' => self::build_request_headers(),
+				'cookies' => self::build_request_cookies( $this->cookie_name ),
+				'method'  => 'PUT'
+			)
+		);
+	}
+	public function delete_request() {
+		return wp_remote_request(
+			self::build_request_url(
+				$this->engine_url,
+				$this->collection,
+				$this->custom_query_param,
+				$this->raw_query
+			),
+			array(
+				'timeout' => 10,
+				'headers' => self::build_request_headers(),
+				'cookies' => self::build_request_cookies( $this->cookie_name ),
+				'method'  => 'DELETE'
 			)
 		);
 	}
 	/**
 	 * Build request URL
 	 */
-	public function build_request_url() {
+	public static function build_request_url( $engine_url, $collection, $custom_query_param, $raw_query ) {
 		$params = array(
-			'collection' => $this->collection,
-			'query'      => $this->custom_query_param,
+			'collection' => $collection,
+			'query'      => $custom_query_param,
 		);
 
 		$sanatized_query = array_merge(
 			$params,
-			$this->sanitize_query( $this->raw_query )
+			self::sanitize_query( $raw_query )
 		);
 
-		$query_url = add_query_arg( $sanatized_query, $this->engine_url );
+		$query_url = add_query_arg( $sanatized_query, $engine_url );
 
 		/**
 		 * PHP kindly replaced dots with underscores in array keys. 
@@ -50,19 +103,19 @@ class Funnelback_Request {
 		return str_replace('f_', 'f.', $query_url);
 	}
 
-	public function build_request_headers() {
+	public static function build_request_headers() {
 		return array(
-			'X-Forwarded-For' => $this->get_user_ip(),
+			'X-Forwarded-For' => self::get_user_ip(),
 		);
 	}
 
-	public function build_request_cookies() {
+	public static function build_request_cookies( $cookie_name ) {
 		$cookies = array();
-		if ( isset($_COOKIE[ $this->cookie_name ] ) )  {
+		if ( isset($_COOKIE[ $cookie_name ] ) )  {
 			$cookies[] = new WP_Http_Cookie(
 					array(
-						'name'  => $this->cookie_name,
-						'value' => $_COOKIE[ $this->cookie_name ]
+						'name'  => $cookie_name,
+						'value' => $_COOKIE[ $cookie_name ]
 					)
 				);
 		}
@@ -72,7 +125,7 @@ class Funnelback_Request {
 	/**
 	 * Utility: Sanitize a Query Array
 	 */
-	public function sanitize_query( $query ) {
+	public static function sanitize_query( $query ) {
 		return array_map( 
 			function( $val ) {
 				return esc_attr( $val );
@@ -80,7 +133,7 @@ class Funnelback_Request {
 		);
 	}
 
-	public function get_user_ip() {
+	public static function get_user_ip() {
 		if ( !empty($_SERVER['HTTP_CLIENT_IP'] ) ) {
 			return $_SERVER['HTTP_CLIENT_IP'];
 		} elseif ( !empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {

@@ -27,6 +27,19 @@ class Funnelback_Display {
 		return $output;
 	}
 
+	public function display_cart() {
+		if ( 200 === wp_remote_retrieve_response_code( $this->raw_results ) ) {
+			$output = wp_remote_retrieve_body( $this->raw_results );
+			$cookie = wp_remote_retrieve_cookie( $this->raw_results, $this->cookie_name );
+			setcookie( $cookie->name, $cookie->value, $cookie->expires );
+			
+		} else {
+			$output = $this->error();
+		}
+
+		return $output;
+	}
+
 	public function error() {
 		return '<div class="alert alert-danger"><h2>Error: Unable to retrieve search results</h2><p>Please refresh the page and try again. If you continue seeing this error, please contact the <a href="https://www.bellevuecollege.edu/servicedesk">Bellevue College Service Desk</a>.</p></div>';
 	}
