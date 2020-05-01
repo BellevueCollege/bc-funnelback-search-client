@@ -371,7 +371,6 @@
 }
 
 .tt-dataset {
-    float: left;
     height: 100%;
 
     .details {
@@ -403,9 +402,15 @@
     background-color: #ddd;
 }
 
-.tt-dataset-organic { width: 25%; }
-.tt-dataset-programs  { width: 40%; }
-.tt-dataset-courses { width: 35%; }
+.tt-dataset-organic {
+    flex: 1 1 25%;
+}
+.tt-dataset-programs  {
+    flex: 1 1 40%;
+}
+.tt-dataset-courses {
+    flex: 1 1 35%;
+}
 
 .tt-dataset-programs .tt-suggestion,
 .tt-dataset-courses .tt-suggestion {
