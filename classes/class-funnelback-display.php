@@ -37,7 +37,8 @@ class Funnelback_Display {
 			$output = $this->error();
 		}
 
-		return $output;
+		// Echo instead of return to avoid wrapping everything in quotes
+		echo $output;
 	}
 
 	public function error() {

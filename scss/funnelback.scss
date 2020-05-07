@@ -368,6 +368,10 @@
     border-radius: .25rem;
 }
 .tt-menu.tt-open {
+    display: flex !important;
+}
+.tt-menu.tt-empty {
+    display: none !important;
 }
 
 .tt-dataset {
