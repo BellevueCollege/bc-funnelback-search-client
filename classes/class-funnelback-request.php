@@ -13,7 +13,7 @@ class Funnelback_Request {
 		$this->engine_url          = $engine_url;
 		$this->collection          = $collection;
 		$this->raw_query           = $raw_query;
-		$this->custom_query_peram  = $custom_query_param;
+		$this->custom_query_param  = $custom_query_param;
 		$this->cookie_name         = $cookie_name;
 	}
 
@@ -86,7 +86,7 @@ class Funnelback_Request {
 	public static function build_request_url( $engine_url, $collection, $custom_query_param, $raw_query ) {
 		$params = array(
 			'collection' => $collection,
-			'query'      => $custom_query_param,
+			'query'      => $_GET[ $custom_query_param ],
 		);
 
 		$sanatized_query = array_merge(
