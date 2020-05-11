@@ -1,0 +1,454 @@
+.funnelback {
+
+    strong {
+        font-weight: 900;
+        background: #ffc;
+    }
+
+
+    /** Search form */
+
+    .jumbotron {
+        background: #fff 0% 40%;
+        background-size: cover;
+        color: #242D3D;
+        display: flex;
+
+        .container {
+            display: flex;
+            align-items: center;
+        }
+
+        .container form {
+            width: 100%;
+        }
+
+        h2 {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .jumbotron {
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+            min-height: 180px;
+        }
+    }
+
+    .jumbotron {
+        .input-group {
+            border-bottom: solid 1px #242D3D;
+
+            & > span {
+                flex: 1 0 auto;
+            }
+        }
+
+        input,
+        input:focus,
+        .input-group-text {
+            box-shadow: none;
+            border: none;
+            background-color: transparent;
+            color: #242D3D;
+            font-size: x-large;
+            font-weight: 300;
+        }
+
+        input[type=search]::-webkit-search-cancel-button {
+            -webkit-appearance: searchfield-cancel-button;
+        }
+
+        input[type=search]:focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 90, 141, 0.5);
+        }
+
+        .btn-link {
+            border: none;
+            background-color: transparent;
+        }
+
+        .btn-link:hover {
+            cursor: pointer;
+        }
+
+        .btn-link:hover:disabled {
+            cursor: initial;
+            color: #6c757d;
+            text-decoration: none;
+        }
+
+        .list-inline-item a {
+            color: #242D3D;
+        }
+
+        small.float-left {
+            color: #242D3D;
+            font-style: italic;
+            font-size: x-small;
+        }
+
+    }
+    @media (max-width: 768px) {
+        .jumbotron .under-form-content {
+            font-size: 75%;
+        }
+    }
+
+    /** Search results */
+
+    .card .card-header a {
+        color: black;
+    }
+
+    @media (max-width: 992px) {
+
+        section.search-results .container,
+        section.search-history .container,
+        section.search-cart .container {
+            padding-top: 0rem;
+        }
+
+        .navbar-toggler.mb-3 {
+            background: #242D3D;
+            padding: 0.75rem 1rem 0.5em;
+            color: #fff;
+        }
+
+        .navbar-toggler.mb-3 .navbar-toggler-icon {
+            width: 1.25em;
+            height: 1.25em;
+        }
+
+    }
+
+    @media (max-width: 768px) {
+
+        /* Hide sort / limit controls on small screens */
+        .search-results .dropdown {
+            display: none;
+        }
+    }
+
+    /** Cart */
+
+    .search-cart .btn-link {
+        border: none;
+    }
+
+    .search-cart .btn-link:hover {
+        cursor: pointer;
+    }
+
+    .search-cart .btn-clear {
+        margin-left: 1rem;
+    }
+
+    /** History */
+
+    .search-history .btn-link {
+        border: none;
+    }
+
+    .search-history .btn-link:hover {
+        cursor: pointer;
+    }
+
+    .session-history-link .session-history-show {
+        background: none;
+        cursor: pointer;
+    }
+
+    .session-history-link .session-history-show:hover {
+        text-decoration: underline;
+    }
+
+    /** Facets */
+
+    .card.search-facet {
+        border-radius: 0px;
+        margin-top: -1px;
+    }
+
+    .card.search-facet:last-child {
+        border-radius: 0px 0px 0.25rem 0.25rem;
+        margin-top: -1px;
+    }
+
+    .search-facets .card.search-refine {
+        border-bottom: none;
+    }
+
+    .search-facets h3 {
+        font-size: initial;
+    }
+
+    .search-results .search-facet h4 {
+        font-size: medium;
+        font-weight: 600;
+        border-bottom: 1px solid #eeefea;
+        padding-bottom: 0.5rem;
+        ;
+    }
+
+    .search-facets .search-facet li {
+        clear: right;
+    }
+
+    .search-facets .badge-default {
+        color: #636c72;
+        /* == text-muted */
+        background-color: #eeefea;
+    }
+
+    .bg-dark {
+        background: #242D3D !important;
+    }
+
+    /** Results */
+
+    .search-results .search-tier h3 {
+        font-size: x-large;
+    }
+
+    .search-results .card-header,
+    .search-results .card-footer {
+        /* background-color: #DDDDDD; */
+    }
+
+    .search-results .card-text img {
+        max-height: 100px;
+        max-width: 200px;
+    }
+
+    .search-results .card-footer strong:not(:first-child) {
+        margin-left: 1rem;
+    }
+
+    .search-results .search-spelling {
+        font-size: x-large;
+    }
+
+    /** Results - Courses */
+
+    .search-result-course .row h5 {
+        color: #242D3D;
+    }
+
+    .search-result-course a.border-secondary {
+        border-color: #ccc !important;
+    }
+
+    /** Results - People */
+
+    .search-result-people h4 a {
+        color: #242D3D;
+    }
+
+    @media (max-width: 768px) {
+        .search-result-people img {
+            margin-top: 1rem;
+            width: 25%;
+        }
+    }
+
+    .search-result-people .fa-user {
+        font-size: 600%;
+        color: #d7d8d2;
+    }
+
+    /** Results - Video */
+
+    .search-result-video h4 a {
+        color: #242D3D;
+    }
+
+    .search-result-video .col-md-3 a {
+        position: relative;
+        display: block;
+    }
+
+    .search-result-video .card-img-overlay .badge {
+        position: absolute;
+        right: .5rem;
+        bottom: .5rem;
+    }
+
+    .search-result-video .card-img-overlay .fa-play-circle {
+        top: 30%;
+        left: 38%;
+        position: absolute;
+        color: rgba(255, 255, 255, .75);
+    }
+
+    .search-result-video a:hover .card-img-overlay .fa-play-circle {
+        color: white;
+    }
+
+    /** Results - Events */
+
+    .search-result-event .search-event-date {
+        width: 100%;
+        border: solid 2px #242D3D;
+        max-width: 5rem;
+    }
+
+    .search-result-event .search-event-date-month {
+        background-color: #242D3D;
+        color: white;
+        font-size: x-large;
+        font-weight: 600;
+    }
+
+    .search-result-event .search-event-date-day {
+        font-size: xx-large;
+        font-weight: 600;
+        height: 4rem;
+    }
+
+    /** Results - Twitter Cards */
+
+    .search-result-twitter-tweet {
+        min-height: 4.5rem;
+        max-height: 4.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /** Contextual Navigation */
+
+    .search-contextual-navigation h3 {
+        color: #242D3D;
+    }
+
+    /** Curator */
+
+    blockquote.search-exhibit {
+        border-left: solid .25rem #eeefea;
+    }
+
+
+    /** Deferred images */
+    img.deferred {
+        display: none;
+    }
+
+    /** Additional Utility */
+    .rounded-pill {
+        border-radius: 2rem;
+    }
+
+    .rounded-pill-right {
+        border-top-right-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+    }
+
+    .rounded-pill-left {
+        border-top-left-radius: 2rem;
+        border-bottom-left-radius: 2rem;
+    }
+}
+
+/* Autocomplete */
+
+.twitter-typeahead {
+    flex-grow: 2;
+    width: 50%;
+}
+
+.tt-menu {
+    background-color: rgba(255, 255, 255, .85);
+    backdrop-filter: blur(5px);
+    color: #222;
+    left: -45% !important;
+    width: 203% !important;
+    padding: .5rem;
+    border: solid 1px rgba(0, 0, 0, .25);
+    border-radius: .25rem;
+}
+.tt-menu.tt-open {
+    display: flex !important;
+}
+.tt-menu.tt-empty {
+    display: none !important;
+}
+
+.tt-dataset {
+    height: 100%;
+
+    .details {
+        p {
+            margin: 0;
+        }
+    }
+}
+
+.tt-dataset:first-child,
+.tt-dataset:first-child .tt-suggestion {
+    border-left: none;
+}
+
+.tt-dataset h5 {
+    font-size: large;
+    text-align: center;
+}
+
+.tt-suggestion {
+    cursor: pointer;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-left: solid 1px rgba(0, 0, 0, .125);
+}
+
+.tt-suggestion.tt-cursor,
+.tt-suggestion:hover {
+    background-color: #ddd;
+}
+
+.tt-dataset-organic {
+    flex: 1 1 25%;
+}
+.tt-dataset-programs  {
+    flex: 1 1 40%;
+}
+.tt-dataset-courses {
+    flex: 1 1 35%;
+}
+
+.tt-dataset-programs .tt-suggestion,
+.tt-dataset-courses .tt-suggestion {
+    margin-top: .0rem;
+    margin-bottom: .0rem;
+}
+
+.tt-dataset .details {
+    line-height: 1rem;
+}
+
+.tt-dataset h6 {
+    margin: 0;
+}
+.tt-selectable {
+    padding: .25rem;
+}
+
+@media (max-width: 768px) {
+    /* Do not display auto-complete on small devices */
+    .tt-menu {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+    }
+    .tt-dataset {
+        width: 100%;
+        float: none;
+        display: none;
+    }
+    .tt-dataset-organic {
+        display: block;
+    }
+    .input-group-prepend .fas.fa-search {
+        display: none;
+    }
+}
