@@ -128,7 +128,7 @@ class Funnelback_Request {
 	public static function sanitize_query( $query ) {
 		return array_map( 
 			function( $val ) {
-				return esc_attr( $val );
+				return urlencode( stripslashes( $val ) );
 			}, $query
 		);
 	}
