@@ -4,7 +4,7 @@ Plugin Name: Funnelback Search Client
 Plugin URI: https://github.com/BellevueCollege/bc-funnelback-search-client
 Description: Funnelback search client for BC Website
 Author: Bellevue College Integration Team
-Version: 1.0.1
+Version: 1.0.2.1-dev
 Author URI: http://www.bellevuecollege.edu
 GitHub Plugin URI: BellevueCollege/bc-funnelback-search-client
 Text Domain: bcfunnelback
@@ -15,10 +15,12 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 require_once('classes/class-funnelback-request.php');
 require_once('classes/class-funnelback-display.php');
 
+$fb_base_url = 'https://bellevuecollege-search.clients.us.funnelback.com/s';
+
 $fb_config_default = array(
 	'query_peram'      => 'txtQuery',
 	'site_peram'       => 'site',
-	'engine_url'       => 'https://bellevuecollege-search.clients.us.funnelback.com/s/search.html',
+	'engine_url'       => "$fb_base_url/search.html",
 	'collection'       => 'bellevuecollege-search',
 	'cookie_name'      => 'user-id'
 );
@@ -142,9 +144,9 @@ function fb_relay_delete( $data ) {
 }
 
 function fb_relay ( $data ) {
-	global $fb_config_default;
+	global $fb_config_default, $fb_base_url;
 	$request =  new Funnelback_Request(
-		'https://bellevuecollege-search.clients.us.funnelback.com/s/cart.json',
+		"$fb_base_url/cart.json",
 		$fb_config_default['collection'],
 		$data->get_params(),
 		$fb_config_default['query_peram'],
