@@ -4,7 +4,7 @@ Plugin Name: Funnelback Search Client
 Plugin URI: https://github.com/BellevueCollege/bc-funnelback-search-client
 Description: Funnelback search client for BC Website
 Author: Bellevue College Integration Team
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://www.bellevuecollege.edu
 GitHub Plugin URI: BellevueCollege/bc-funnelback-search-client
 Text Domain: bcfunnelback
@@ -15,10 +15,12 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 require_once('classes/class-funnelback-request.php');
 require_once('classes/class-funnelback-display.php');
 
+$fb_base_url = 'https://bellevuecollege-search.clients.us.funnelback.com/s';
+
 $fb_config_default = array(
 	'query_peram'      => 'txtQuery',
 	'site_peram'       => 'site',
-	'engine_url'       => 'https://bellevuecollege-search.clients.us.funnelback.com/s/search.html',
+	'engine_url'       => "$fb_base_url/search.html",
 	'collection'       => 'bellevuecollege-search',
 	'cookie_name'      => 'user-id'
 );
@@ -60,7 +62,7 @@ add_shortcode( 'bc-funnelback-search', 'bcfunnelback_shortcode' );
  * Enqueue Scripts and Styles
  */
 function bcfunnelback_scripts() {
-	wp_register_style( 'bcfunnelback_style', plugin_dir_url( __FILE__ ) . 'css/funnelback.css', '1.0.1' );
+	wp_register_style( 'bcfunnelback_style', plugin_dir_url( __FILE__ ) . 'css/funnelback.css', '1.0.2' );
 	wp_enqueue_style( 'bcfunnelback_style' );
 
 	//wp_enqueue_script( 'typeahead_script', 'https://stage-15-20-search.clients.funnelback.com/s/resources-global/thirdparty/typeahead-0.11.1/typeahead.bundle.min.js', array( 'jquery' ), '1.0.1', true );
@@ -142,9 +144,9 @@ function fb_relay_delete( $data ) {
 }
 
 function fb_relay ( $data ) {
-	global $fb_config_default;
+	global $fb_config_default, $fb_base_url;
 	$request =  new Funnelback_Request(
-		'https://bellevuecollege-search.clients.us.funnelback.com/s/cart.json',
+		"$fb_base_url/cart.json",
 		$fb_config_default['collection'],
 		$data->get_params(),
 		$fb_config_default['query_peram'],
