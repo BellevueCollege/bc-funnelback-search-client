@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/BellevueCollege/bc-funnelback-search-client#readme",
   "dependencies": {
-    "node-sass": "^4.13.1"
+    "node-sass": "^9.0.0"
   }
 }
