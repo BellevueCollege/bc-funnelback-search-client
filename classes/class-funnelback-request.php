@@ -84,9 +84,19 @@ class Funnelback_Request {
 	 * Build request URL
 	 */
 	public static function build_request_url( $engine_url, $collection, $custom_query_param, $raw_query ) {
+		
+		// Fall back to default query if custom query param is not set
+		if ( isset( $_GET[ $custom_query_param ] ) ) {
+			$unsanatized_query = $_GET[ $custom_query_param ];
+		} else if ( isset( $_GET[ 'query' ] ) ) {
+			$unsanatized_query = $_GET[ 'query' ];
+		} else {
+			$unsanatized_query = '';
+		}
+		
 		$params = array(
 			'collection' => $collection,
-			'query'      => $_GET[ $custom_query_param ],
+			'query'      => $unsanatized_query,
 		);
 
 		$sanatized_query = array_merge(

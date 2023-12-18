@@ -4,7 +4,7 @@ Plugin Name: Funnelback Search Client
 Plugin URI: https://github.com/BellevueCollege/bc-funnelback-search-client
 Description: Funnelback search client for BC Website
 Author: Bellevue College Integration Team
-Version: 1.0.2
+Version: 1.0.3
 Author URI: http://www.bellevuecollege.edu
 GitHub Plugin URI: BellevueCollege/bc-funnelback-search-client
 Text Domain: bcfunnelback
