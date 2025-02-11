@@ -1,0 +1,63 @@
+# PHP
+
+trigger:
+  branches:
+    include:
+      - trunk
+  paths:
+    exclude:
+      - azure-pipelines.yml
+pr:
+  branches:
+    include:
+      - trunk
+      - release-v*
+      - hotfix-v*
+pool:
+    vmImage: ubuntu-latest
+
+variables:
+    npm_config_cache: $(Pipeline.Workspace)/.npm
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSource: 'spec'
+      versionSpec: '20.x'
+  - task: Cache@2
+    inputs:
+      key: 'npm | "$(Agent.OS)" | package-lock.json'
+      restoreKeys: |
+        npm | "$(Agent.OS)"
+      path: $(npm_config_cache)
+    displayName: Cache npm
+  - task: Npm@1
+    inputs:
+      command: 'ci'
+    displayName: NPM Clean Install
+  - task: Npm@1
+    inputs:
+      command: 'custom'
+      customCommand: 'run scss'
+    displayName: NPM Build
+  - task: Npm@1
+    inputs:
+      command: 'custom'
+      customCommand: 'prune --omit=dev'
+    displayName: NPM Prune Dev Deps
+  - task: replacetokens@6
+    inputs:
+      sources: 'bc-funnelback-search-client.php'
+      addBOM: true
+  - task: DeleteFiles@1
+    inputs:
+      SourceFolder:
+      Contents: |
+        /.git
+        /.git*
+      RemoveDotFiles: true
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Pipeline.Workspace)'
+      artifact: 'bc-funnelback-search-client'
+      publishLocation: 'pipeline'
