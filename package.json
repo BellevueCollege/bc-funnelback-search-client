@@ -1,10 +1,10 @@
 {
   "name": "bc-funnelback-search-client",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "bc-funnelback-search-client.php",
   "scripts": {
-    "scss": "node-sass --watch scss -o css"
+    "scss": "sass scss/funnelback.scss css/funnelback.css"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/BellevueCollege/bc-funnelback-search-client#readme",
   "dependencies": {
-    "node-sass": "^9.0.0"
+    "sass": "^1.84.0"
   }
 }
