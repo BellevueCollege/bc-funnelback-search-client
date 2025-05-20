@@ -21,7 +21,7 @@ class Funnelback_Display {
 
 		} elseif ( 503 === wp_remote_retrieve_response_code( $this->raw_results ) ) {
 			$decoded = json_decode( wp_remote_retrieve_body( $this->raw_results ), true );
-			$output = '<div class="alert alert-warning"><h2>' . esc_html( $decoded['message'] ) . '</h2></div>';
+			$output = '<div class="alert alert-warning container"><h2>' . esc_html( $decoded['message'] ) . '</h2></div>';
 			$output .= ( 'true' === $this->debug ) ? $this->debug() : '';
 
 		} else {

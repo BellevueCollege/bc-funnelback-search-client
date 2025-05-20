@@ -37,7 +37,7 @@ class Funnelback_Request {
 			return array(
 				'body' => json_encode([
 					'error' => true,
-					'message' => 'Search service temporarily unavailable',
+					'message' => 'Search service temporarily unavailable. Please refresh to try again.',
 					'results' => []
 				]),
 				'response' => array(
