@@ -19,6 +19,11 @@ class Funnelback_Display {
 			$output .= $this->build_cookie_script();
 			$output .= ( 'true' === $this->debug ) ? $this->debug() : '';
 
+		} elseif ( 503 === wp_remote_retrieve_response_code( $this->raw_results ) ) {
+			$decoded = json_decode( wp_remote_retrieve_body( $this->raw_results ), true );
+			$output = '<div class="alert alert-warning"><h2>' . esc_html( $decoded['message'] ) . '</h2></div>';
+			$output .= ( 'true' === $this->debug ) ? $this->debug() : '';
+
 		} else {
 			$output = $this->error();
 			$output .= ( 'true' === $this->debug ) ? $this->debug() : '';

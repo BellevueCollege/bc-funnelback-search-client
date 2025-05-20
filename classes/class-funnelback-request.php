@@ -18,7 +18,7 @@ class Funnelback_Request {
 	}
 
 	public function get_results() {
-		return wp_remote_get(
+		$response = wp_remote_get(
 			self::build_request_url(
 				$this->engine_url,
 				$this->collection,
@@ -26,11 +26,28 @@ class Funnelback_Request {
 				$this->raw_query
 			),
 			array(
-				'timeout' => 10,
+				'timeout' => 2,
 				'headers' => self::build_request_headers(),
 				'cookies' => self::build_request_cookies( $this->cookie_name ),
 			)
 		);
+		
+		if ( is_wp_error( $response ) ) {
+			error_log( 'Funnelback Search Error: ' . $response->get_error_message() );
+			return array(
+				'body' => json_encode([
+					'error' => true,
+					'message' => 'Search service temporarily unavailable',
+					'results' => []
+				]),
+				'response' => array(
+					'code' => 503,
+					'message' => 'Service Unavailable'
+				)
+			);
+		}
+		
+		return $response;
 	}
 
 	public function post_request() {
@@ -42,7 +59,7 @@ class Funnelback_Request {
 				$this->raw_query
 			),
 			array(
-				'timeout' => 10,
+				'timeout' => 1,
 				'headers' => self::build_request_headers(),
 				'cookies' => self::build_request_cookies( $this->cookie_name ),
 			)
@@ -57,7 +74,7 @@ class Funnelback_Request {
 				$this->raw_query
 			),
 			array(
-				'timeout' => 10,
+				'timeout' => 1,
 				'headers' => self::build_request_headers(),
 				'cookies' => self::build_request_cookies( $this->cookie_name ),
 				'method'  => 'PUT'
@@ -73,7 +90,7 @@ class Funnelback_Request {
 				$this->raw_query
 			),
 			array(
-				'timeout' => 10,
+				'timeout' => 1,
 				'headers' => self::build_request_headers(),
 				'cookies' => self::build_request_cookies( $this->cookie_name ),
 				'method'  => 'DELETE'
