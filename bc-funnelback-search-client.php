@@ -4,7 +4,7 @@ Plugin Name: Funnelback Search Client
 Plugin URI: https://github.com/BellevueCollege/bc-funnelback-search-client
 Description: Funnelback search client for BC Website
 Author: Bellevue College Integration Team
-Version: 1.0.4
+Version: 1.0.5
 Author URI: http://www.bellevuecollege.edu
 GitHub Plugin URI: BellevueCollege/bc-funnelback-search-client
 Text Domain: bcfunnelback
@@ -22,7 +22,27 @@ $fb_config_default = array(
 	'site_peram'       => 'site',
 	'engine_url'       => "$fb_base_url/search.html",
 	'collection'       => 'bellevuecollege-search',
-	'cookie_name'      => 'user-id'
+	'cookie_name'      => 'user-id',
+	'blocked_patterns' => array(
+		// Block any SQL injection attempts
+		'/SELECT.*FROM|INSERT.*INTO|UPDATE.*SET|DELETE.*FROM|DROP.*TABLE/i',
+		// Block any attempts to access system files
+		'/\.\./',
+		// Block any attempts to execute commands
+		'/exec\(|system\(|shell_exec\(|passthru\(|popen\(/i',
+		// Block any attempts to access sensitive files
+		'/\.htaccess|\.htpasswd|\.env|\.git|\.svn|\.hg/i',
+		// Block any attempts to access configuration files
+		'/config\.|wp-config\.php|database\.php/i',
+		//Block use of backtik
+		'/`|%60/i',
+		//Block queries that start with the letter 's' followed by a space
+		'/^s[ \+]/i',
+		// Block single letter s
+		'/^s$/i',
+		// Block queries that are just %s or %25s
+		'/^%s$|^%25s$/',
+	)
 );
 
 // Shortcode
@@ -36,6 +56,17 @@ function bcfunnelback_shortcode( $sc_config ) {
 		'localstorage_key' => 'searchHistory',
 		'debug'            => false
 	), $sc_config, 'bcfunnelback_shortcode' );
+
+	$query = isset($_GET[$sc_config['query_peram']]) ? $_GET[$sc_config['query_peram']] : '';
+
+	// Check if query matches any blocked patterns
+	$secondary_query = $_GET['query'] ?? '';
+	foreach ($fb_config_default['blocked_patterns'] as $pattern) {
+		if ( preg_match($pattern, $query) || preg_match($pattern, $secondary_query) ) {
+			error_log(esc_html("FUNNELBACK BLOCKED! Blocked Query: $query"));
+			return '<div class="alert alert-danger container"><h2>Invalid Search Query</h2><p>Your search query contains invalid characters or patterns. Please try a different search.</p></div>';
+		}
+	}
 
 	$request = new Funnelback_Request(
 		$sc_config['engine_url'],
