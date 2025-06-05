@@ -1,5 +1,13 @@
 .funnelback {
 
+    .search-results > .container > .row > .col-md-9 {
+        display: block !important;
+    }
+
+    .search-counts {
+        min-width: 10rem;
+    }
+
     .pl-3 {
         padding-left: 1rem;
     }
@@ -128,6 +136,15 @@
             --bs-nav-tabs-border-color: #aaa !important;
             --bs-nav-tabs-link-active-bg: #eee !important;
         }
+    }
+
+    #search-history,
+    #search-cart {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1160px;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 
     /** Search results */
