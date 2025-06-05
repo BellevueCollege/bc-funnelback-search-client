@@ -93,7 +93,7 @@ add_shortcode( 'bc-funnelback-search', 'bcfunnelback_shortcode' );
  * Enqueue Scripts and Styles
  */
 function bcfunnelback_scripts() {
-	wp_register_style( 'bcfunnelback_style', plugin_dir_url( __FILE__ ) . 'css/funnelback.css', '1.1' );
+	wp_register_style( 'bcfunnelback_style', plugin_dir_url( __FILE__ ) . 'css/funnelback.css', array(), '1.1' );
 	wp_enqueue_style( 'bcfunnelback_style' );
 
 	//wp_enqueue_script( 'typeahead_script', 'https://stage-15-20-search.clients.funnelback.com/s/resources-global/thirdparty/typeahead-0.11.1/typeahead.bundle.min.js', array( 'jquery' ), '1.0.1', true );
