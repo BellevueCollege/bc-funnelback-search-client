@@ -1,5 +1,15 @@
 .funnelback {
 
+    .float-right {
+        float: right;
+    }
+
+    .card-text::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
     strong {
         font-weight: 900;
         background: #ffc;
