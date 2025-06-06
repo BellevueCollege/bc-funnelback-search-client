@@ -34,8 +34,6 @@ $fb_config_default = array(
 		'/\.htaccess|\.htpasswd|\.env|\.git|\.svn|\.hg/i',
 		// Block any attempts to access configuration files
 		'/config\.|wp-config\.php|database\.php/i',
-		//Block use of backtik
-		'/`|%60/i',
 		//Block queries that start with the letter 's' followed by a space
 		'/^s[ \+]/i',
 		// Block single letter s
