@@ -4,7 +4,7 @@ Plugin Name: Funnelback Search Client
 Plugin URI: https://github.com/BellevueCollege/bc-funnelback-search-client
 Description: Funnelback search client for BC Website
 Author: Bellevue College Integration Team
-Version: 1.0.5
+Version: 1.1
 Author URI: http://www.bellevuecollege.edu
 GitHub Plugin URI: BellevueCollege/bc-funnelback-search-client
 Text Domain: bcfunnelback
@@ -34,8 +34,6 @@ $fb_config_default = array(
 		'/\.htaccess|\.htpasswd|\.env|\.git|\.svn|\.hg/i',
 		// Block any attempts to access configuration files
 		'/config\.|wp-config\.php|database\.php/i',
-		//Block use of backtik
-		'/`|%60/i',
 		//Block queries that start with the letter 's' followed by a space
 		'/^s[ \+]/i',
 		// Block single letter s
@@ -93,7 +91,7 @@ add_shortcode( 'bc-funnelback-search', 'bcfunnelback_shortcode' );
  * Enqueue Scripts and Styles
  */
 function bcfunnelback_scripts() {
-	wp_register_style( 'bcfunnelback_style', plugin_dir_url( __FILE__ ) . 'css/funnelback.css', '1.0.2' );
+	wp_register_style( 'bcfunnelback_style', plugin_dir_url( __FILE__ ) . 'css/funnelback.css', array(), '1.1' );
 	wp_enqueue_style( 'bcfunnelback_style' );
 
 	//wp_enqueue_script( 'typeahead_script', 'https://stage-15-20-search.clients.funnelback.com/s/resources-global/thirdparty/typeahead-0.11.1/typeahead.bundle.min.js', array( 'jquery' ), '1.0.1', true );
@@ -102,86 +100,3 @@ function bcfunnelback_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'bcfunnelback_scripts' );
-
-
-/**
- * Add REST Routes for cart
- */
-
-add_action( 'rest_api_init', function () {
-  register_rest_route( 'funnelback/v1', '/cart', array(
-    'methods' => 'GET',
-    'callback' => 'fb_relay_get',
-  ) );
-  register_rest_route( 'funnelback/v1', '/cart', array(
-    'methods' => 'POST',
-    'callback' => 'fb_relay_post',
-  ) );
-  register_rest_route( 'funnelback/v1', '/cart', array(
-    'methods' => 'PUT',
-    'callback' => 'fb_relay_put',
-  ) );
-  register_rest_route( 'funnelback/v1', '/cart', array(
-    'methods' => 'DELETE',
-    'callback' => 'fb_relay_delete',
-  ) );
-} );
-
-function fb_relay_get( $data ) {
-	global $fb_config_default;
-	$request = fb_relay( $data );
-	$raw_results = $request->get_results();
-	$results = new Funnelback_Display(
-		$raw_results,
-		false,
-		$fb_config_default['cookie_name'],
-	);
-	return $results->display_cart();
-}
-
-function fb_relay_post( $data ) {
-	global $fb_config_default;
-	$request = fb_relay( $data );
-	$raw_results = $request->post_request();
-	$results = new Funnelback_Display(
-		$raw_results,
-		false,
-		$fb_config_default['cookie_name'],
-	);
-	return $results->display_cart();
-}
-
-function fb_relay_put( $data ) {
-	global $fb_config_default;
-	$request = fb_relay( $data );
-	$raw_results = $request->put_request();
-	$results = new Funnelback_Display(
-		$raw_results,
-		false,
-		$fb_config_default['cookie_name'],
-	);
-	return $results->display_cart();
-}
-function fb_relay_delete( $data ) {
-	global $fb_config_default;
-	$request = fb_relay( $data );
-	$raw_results = $request->delete_request();
-	$results = new Funnelback_Display(
-		$raw_results,
-		false,
-		$fb_config_default['cookie_name'],
-	);
-	return $results->display_cart();
-}
-
-function fb_relay ( $data ) {
-	global $fb_config_default, $fb_base_url;
-	$request =  new Funnelback_Request(
-		"$fb_base_url/cart.json",
-		$fb_config_default['collection'],
-		$data->get_params(),
-		$fb_config_default['query_peram'],
-		$fb_config_default['cookie_name'],
-	);
-	return $request;
-}

@@ -26,7 +26,7 @@ class Funnelback_Request {
 				$this->raw_query
 			),
 			array(
-				'timeout' => 2,
+				'timeout' => 5,
 				'headers' => self::build_request_headers(),
 				'cookies' => self::build_request_cookies( $this->cookie_name ),
 			)

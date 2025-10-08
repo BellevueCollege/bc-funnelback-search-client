@@ -1,8 +1,41 @@
 .funnelback {
 
+    .search-results > .container > .row > .col-md-9 {
+        display: block !important;
+    }
+
+    .search-counts {
+        min-width: 10rem;
+    }
+
+    .pl-3 {
+        padding-left: 1rem;
+    }
+
+
+    .float-right {
+        float: right;
+    }
+
+    .card-text::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
     strong {
         font-weight: 900;
         background: #ffc;
+    }
+
+    // Navigation overrides 
+    .nav {
+        .nav-link {
+            text-decoration: none !important;
+        }
+        .nav-link.disabled {
+            color: var(--bs-nav-link-disabled-color) !important;
+        }
     }
 
 
@@ -94,6 +127,24 @@
         .jumbotron .under-form-content {
             font-size: 75%;
         }
+    }
+
+    .tabs {
+        margin-top: 1rem !important;
+        .nav-tabs {
+            --bs-nav-tabs-link-active-border-color: #ccc !important;
+            --bs-nav-tabs-border-color: #aaa !important;
+            --bs-nav-tabs-link-active-bg: #eee !important;
+        }
+    }
+
+    #search-history,
+    #search-cart {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1160px;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 
     /** Search results */
@@ -348,6 +399,61 @@
         border-top-left-radius: 2rem;
         border-bottom-left-radius: 2rem;
     }
+
+
+    // Facebook
+    .search-result-facebook {
+        h4 {
+            margin-top: 0 !important;
+        }
+        .card-body .media {
+            & > a {
+                float: left;
+                margin-right: 1rem;
+                img {
+                    height: 3.5rem;
+                    width: auto;
+                }
+            }
+            &::after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+        }   
+    }
+
+    //Events
+    .search-result-event {
+        h4 {
+            margin-top: 0 !important;
+        }
+            
+    }
+
+    // People
+    .search-result-people {
+        h4 {
+            margin-top: 0 !important;
+        }
+        .card-subtitle {
+            margin-top: .125rem;
+        }
+        .fas.fa-user {
+            margin: 2rem;
+        }
+    }
+
+
+
+    #search-results-content.container {
+        .list-unstyled.container {
+            margin-top: 0rem;
+        }
+
+    }
+
+
 }
 
 /* Autocomplete */
@@ -450,5 +556,15 @@
     }
     .input-group-prepend .fas.fa-search {
         display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .search-result-instagram {
+        .card img.card-img {
+            border-radius: var(--bs-border-radius);
+            margin: 2rem 0 2rem 2rem;
+            max-width: 100%;
+        }
     }
 }
