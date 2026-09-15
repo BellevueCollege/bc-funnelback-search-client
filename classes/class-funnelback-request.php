@@ -26,7 +26,7 @@ class Funnelback_Request {
 				$this->raw_query
 			),
 			array(
-				'timeout' => 5,
+				'timeout' => self::get_request_timeout(),
 				'headers' => self::build_request_headers(),
 				'cookies' => self::build_request_cookies( $this->cookie_name ),
 			)
@@ -97,6 +97,21 @@ class Funnelback_Request {
 			)
 		);
 	}
+	/**
+	 * HTTP timeout for search requests (seconds). Override in wp-config.php with BC_FUNNELBACK_REQUEST_TIMEOUT.
+	 *
+	 * @return int
+	 */
+	private static function get_request_timeout() {
+		$default_timeout_seconds = 5;
+
+		if ( defined( 'BC_FUNNELBACK_REQUEST_TIMEOUT' ) ) {
+			return (int) BC_FUNNELBACK_REQUEST_TIMEOUT;
+		}
+
+		return $default_timeout_seconds;
+	}
+
 	/**
 	 * Build request URL
 	 */

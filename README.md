@@ -22,3 +22,15 @@ The base shortcode is `[bcfunnelback_shortcode]`
 * `localstorage_key`  
   Legacy- no longer used
 
+## Configuration
+
+Optional in `wp-config.php`: `BC_FUNNELBACK_REQUEST_TIMEOUT` — HTTP timeout in seconds for search requests (default `5`).
+
+```php
+define( 'BC_FUNNELBACK_REQUEST_TIMEOUT', 10 );
+```
+
+## CI/CD
+
+Uses [bc-wordpress-devops-templates](https://github.com/BellevueCollege/bc-wordpress-devops-templates) (`azure-pipelines.yml`, `azure-pipelines-release.yml`). Setup details are in that repo’s README.
+
