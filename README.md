@@ -22,3 +22,10 @@ The base shortcode is `[bcfunnelback_shortcode]`
 * `localstorage_key`  
   Legacy- no longer used
 
+## Configuration
+
+Optional in `wp-config.php`: `BC_FUNNELBACK_REQUEST_TIMEOUT` — HTTP timeout in seconds for search requests (default `5`).
+
+```php
+define( 'BC_FUNNELBACK_REQUEST_TIMEOUT', 10 );
+```
